@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         currentSpeed = PlayerWalkSpeed;
         maxSpeed = currentSpeed;
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire2"))
         {
             currentSpeed = PlayerSprintSpeed;
         }
