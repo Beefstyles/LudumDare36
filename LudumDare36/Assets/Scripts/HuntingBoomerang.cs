@@ -16,7 +16,7 @@ public class HuntingBoomerang : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rb.AddTorque(15F);
     }
-	// Update is called once per frame
+
 	void Update ()
     {
         if(delayTimer >= 0)
