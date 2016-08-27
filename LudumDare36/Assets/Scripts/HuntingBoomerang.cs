@@ -26,9 +26,6 @@ public class HuntingBoomerang : MonoBehaviour {
         {
             delayTimer -= Time.deltaTime;
         }
-
-        if (rb.velocity.x <= 0 || rb.velocity.y <= 0)
-        {
             if (!isStationary && delayTimer <= 0)
             {
                 rb.Sleep();
@@ -36,12 +33,9 @@ public class HuntingBoomerang : MonoBehaviour {
                 isStationary = true;
                 pickupable = true;
             }
-            
-        }
-        
     }
 
-    void OnColliderEnter2D(Collider2D coll)
+    void OnCollisionEnter2D(Collision2D coll)
     {
         if(coll.gameObject.tag == "Creature")
         {
@@ -52,7 +46,7 @@ public class HuntingBoomerang : MonoBehaviour {
         {
             if (pickupable)
             {
-                playerWeapons = coll.GetComponent<PlayerWeapons>();
+                playerWeapons = coll.gameObject.GetComponent<PlayerWeapons>();
                 playerWeapons.NumberOfHuntingBoomerangs++;
                 Destroy(gameObject);
             }

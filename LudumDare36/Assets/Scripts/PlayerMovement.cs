@@ -50,12 +50,9 @@ public class PlayerMovement : MonoBehaviour {
                 var pos = Input.mousePosition;
                 pos.z = transform.position.z - Camera.main.transform.position.z;
                 pos = Camera.main.ScreenToWorldPoint(pos);
-                Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y));
-                Vector2 myPos = new Vector2(transform.position.x, transform.position.y + 1);
-                Vector2 dir = target - myPos;
-                dir.Normalize();
-                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, myPos, Quaternion.identity) as GameObject;
-                weaponUsed.GetComponent<Rigidbody2D>().velocity = dir * projectileSpeed;
+                var q = Quaternion.FromToRotation(Vector3.up, pos - transform.position);
+                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, q) as GameObject;
+                weaponUsed.GetComponent<Rigidbody2D>().AddForce(weaponUsed.transform.up * 500.0F);
                 playerWeapons.NumberOfHuntingBoomerangs--;
             }
         }
