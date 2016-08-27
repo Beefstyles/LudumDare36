@@ -32,7 +32,7 @@ public class LevelReader : MonoBehaviour
     {
         try
         {
-            jsonLevelData = File.ReadAllText(Application.dataPath + "/Resources/Levels/Level1.json");
+            jsonLevelData = File.ReadAllText(Application.dataPath + "/Resources/Levels/Level2.json");
         }
         catch (Exception e)
         {
