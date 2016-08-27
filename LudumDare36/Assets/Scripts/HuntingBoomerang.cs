@@ -8,11 +8,14 @@ public class HuntingBoomerang : MonoBehaviour {
     Vector3 oppositeVelocity;
     public float brakePower;
     private float delayTimer;
+    private bool pickupable;
+    PlayerWeapons playerWeapons;
 	
     void Start()
     {
         delayTimer = 1F;
         isStationary = false;
+        pickupable = false;
         rb = GetComponent<Rigidbody2D>();
         rb.AddTorque(15F);
     }
@@ -30,6 +33,7 @@ public class HuntingBoomerang : MonoBehaviour {
             {
                 rb.Sleep();
                 isStationary = true;
+                pickupable = true;
             }
             
         }
@@ -41,6 +45,16 @@ public class HuntingBoomerang : MonoBehaviour {
         if(coll.gameObject.tag == "Creature")
         {
 
+        }
+
+        if(coll.gameObject.tag == "Player")
+        {
+            if (pickupable)
+            {
+                playerWeapons = coll.GetComponent<PlayerWeapons>();
+                playerWeapons.NumberOfHuntingBoomerangs++;
+            }
+            Destroy(this);
         }
     }
 }

@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class PlayerWeapons : MonoBehaviour {
+public class GameUI : MonoBehaviour {
 
-    public GameObject HuntingBoomerang;
-    public int NumberOfHuntingBoomerangs;
+    [System.Serializable]
+    public class GameText
+    {
+        Text WeaponChoice, WeaponChoiceRem;
+    }
 
 	// Use this for initialization
 	void Start () {

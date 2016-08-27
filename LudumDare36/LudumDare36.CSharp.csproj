@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\CreatureHealth.cs" />
     <Compile Include="Assets\Scripts\DeadCreaturePickup.cs" />
     <Compile Include="Assets\Scripts\GameControlLoop.cs" />
+    <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\HuntingBoomerang.cs" />
     <Compile Include="Assets\Scripts\LevelPopulator.cs" />
     <Compile Include="Assets\Scripts\LevelReader.cs" />
