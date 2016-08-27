@@ -7,16 +7,28 @@ public class GameUI : MonoBehaviour {
     [System.Serializable]
     public class GameText
     {
-        Text WeaponChoice, WeaponChoiceRem;
+        public Text WeaponChoice, WeaponChoiceRem;
     }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    PlayerWeapons playerWeapons;
+    PlayerMovement playerMovement;
+    public GameText gameText;
+
+    void Start ()
+    {
+        playerWeapons = FindObjectOfType<PlayerWeapons>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update ()
+    {
+        if(playerMovement.weaponUsed.name.ToString() != null)
+        {
+            gameText.WeaponChoice.text = playerMovement.weaponUsed.name.ToString();
+        }
+
+            gameText.WeaponChoiceRem.text = playerWeapons.NumberOfHuntingBoomerangs.ToString();
+
+    }
 }

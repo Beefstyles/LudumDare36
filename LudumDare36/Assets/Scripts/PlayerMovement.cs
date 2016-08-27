@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     public float PlayerWalkSpeed;
     public float PlayerSprintSpeed;
     PlayerWeapons playerWeapons;
-    private GameObject weaponUsed;
+    public GameObject weaponUsed;
     Vector3 mousePos;
 
     void Start()
@@ -44,8 +44,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, Quaternion.identity) as GameObject;
-            weaponUsed.GetComponent<Rigidbody2D>().AddForce(mousePos * 100);
+            if (playerWeapons.NumberOfHuntingBoomerangs >= 1)
+            {
+                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, Quaternion.identity) as GameObject;
+                weaponUsed.GetComponent<Rigidbody2D>().AddForce(mousePos * 100);
+                playerWeapons.NumberOfHuntingBoomerangs--;
+            }
+            
         }
     }
 }
