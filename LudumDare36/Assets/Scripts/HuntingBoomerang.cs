@@ -41,7 +41,7 @@ public class HuntingBoomerang : MonoBehaviour {
         
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    void OnColliderEnter2D(Collider2D coll)
     {
         if(coll.gameObject.tag == "Creature")
         {
