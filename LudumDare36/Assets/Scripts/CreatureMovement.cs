@@ -57,6 +57,5 @@ public class CreatureMovement : MonoBehaviour {
     {
         moveTarget = CreatureWaypoints[Random.Range(0, CreatureWaypoints.Length)].gameObject.transform;
         hasTarget = true;
-        
     }
 }

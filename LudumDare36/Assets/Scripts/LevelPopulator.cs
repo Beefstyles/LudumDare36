@@ -59,7 +59,7 @@ public class LevelPopulator : MonoBehaviour {
                         break;
                     case ('M'):
                         CreatureMovePointClone = Instantiate(CreatureMovePoint, objectPosition, Quaternion.identity) as GameObject;
-                        CreatureMovePoint.name = "CreatureMP";
+                        CreatureMovePoint.name = "CreatureMovementPoint";
                         CreatureMovePointClone.transform.SetParent(spawnParent);
                         yield return new WaitForSeconds(levelPopDelay);
                         break;

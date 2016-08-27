@@ -10,7 +10,9 @@ public class HuntingBoomerang : MonoBehaviour {
     private float delayTimer;
     public bool pickupable;
     PlayerWeapons playerWeapons;
-	
+    CreatureHealth creatureHealth;
+    private int damage = 100;
+
     void Start()
     {
         delayTimer = 1F;
@@ -39,7 +41,8 @@ public class HuntingBoomerang : MonoBehaviour {
     {
         if(coll.gameObject.tag == "Creature")
         {
-
+            creatureHealth = coll.gameObject.GetComponent<CreatureHealth>();
+            creatureHealth.CreatureHlth -= damage;
         }
 
         if(coll.gameObject.tag == "Player")

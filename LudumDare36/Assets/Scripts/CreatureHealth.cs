@@ -3,10 +3,11 @@ using System.Collections;
 
 public class CreatureHealth : MonoBehaviour {
 
-    public int CreatureHlth;
+    public int CreatureHlth = 100;
     public GameObject DeadCreature;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 	
 	}
 	
