@@ -9,6 +9,7 @@ public class CreatureMovement : MonoBehaviour {
     private Transform moveTarget;
     private bool scannedForTargets;
     private float speed = 1F;
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -37,24 +38,18 @@ public class CreatureMovement : MonoBehaviour {
             {
                 float step = speed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, moveTarget.position, step);
+                Debug.DrawLine(transform.position, moveTarget.position);
             }
         }
 	}
 
-    void OnColliderEnter2D(Collision2D coll)
-    {
-        if(coll.gameObject.tag == "Rock" || coll.gameObject.tag == "Tree")
-        {
-            Debug.Log("Getting new target");
-            GetNewTarget();
-        }
-    }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.tag == "MovePoint")
+        if (coll.gameObject.tag == "Rock" || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "MovePoint")
         {
-            GetNewTarget();
+            Debug.Log("Getting new target due to hitting " + coll.gameObject.tag);
+            hasTarget = false;
         }
     }
 
@@ -62,5 +57,6 @@ public class CreatureMovement : MonoBehaviour {
     {
         moveTarget = CreatureWaypoints[Random.Range(0, CreatureWaypoints.Length)].gameObject.transform;
         hasTarget = true;
+        
     }
 }
