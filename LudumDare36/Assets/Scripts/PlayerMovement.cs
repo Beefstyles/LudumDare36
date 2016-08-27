@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     PlayerWeapons playerWeapons;
     public GameObject weaponUsed;
     Vector3 mousePos;
+    private float projectileSpeed = 5.0F;
 
     void Start()
     {
@@ -46,11 +47,17 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (playerWeapons.NumberOfHuntingBoomerangs >= 1)
             {
-                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, Quaternion.identity) as GameObject;
-                weaponUsed.GetComponent<Rigidbody2D>().AddForce(mousePos * 100);
+                var pos = Input.mousePosition;
+                pos.z = transform.position.z - Camera.main.transform.position.z;
+                pos = Camera.main.ScreenToWorldPoint(pos);
+                Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y));
+                Vector2 myPos = new Vector2(transform.position.x, transform.position.y + 1);
+                Vector2 dir = target - myPos;
+                dir.Normalize();
+                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, myPos, Quaternion.identity) as GameObject;
+                weaponUsed.GetComponent<Rigidbody2D>().velocity = dir * projectileSpeed;
                 playerWeapons.NumberOfHuntingBoomerangs--;
             }
-            
         }
     }
 }

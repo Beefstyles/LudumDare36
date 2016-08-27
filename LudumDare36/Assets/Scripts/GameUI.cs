@@ -16,19 +16,27 @@ public class GameUI : MonoBehaviour {
 
     void Start ()
     {
-        playerWeapons = FindObjectOfType<PlayerWeapons>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
-        if(playerMovement.weaponUsed.name.ToString() != null)
+        if(playerWeapons == null || playerMovement == null)
         {
-            gameText.WeaponChoice.text = playerMovement.weaponUsed.name.ToString();
+            playerWeapons = FindObjectOfType<PlayerWeapons>();
+            playerMovement = FindObjectOfType<PlayerMovement>();
         }
 
+        if (playerWeapons != null && playerMovement != null)
+        {
+            if (playerMovement.weaponUsed != null)
+            {
+                gameText.WeaponChoice.text = playerMovement.weaponUsed.name.ToString();
+            }
+
             gameText.WeaponChoiceRem.text = playerWeapons.NumberOfHuntingBoomerangs.ToString();
+        }
+       
 
     }
 }

@@ -11,6 +11,7 @@ public class LevelPopulator : MonoBehaviour {
     public GameObject levelGrid;
     private Renderer levelGridRend;
     GameControlLoop gameControlLoop;
+    private float levelPopDelay = 0.001F;
 
     void Start()
     {
@@ -36,19 +37,19 @@ public class LevelPopulator : MonoBehaviour {
                         spawnPointClone.name = "SpawnPoint";
                         spawnPointClone.transform.SetParent(spawnParent);
                         gameControlLoop.PlayerSpawnPoint = spawnPointClone.transform;
-                        yield return new WaitForSeconds(0.05F);
+                        yield return new WaitForSeconds(levelPopDelay);
                         break;
                     case ('T'):
                         treeBlockClone = Instantiate(TreeBlock, objectPosition, Quaternion.identity) as GameObject;
                         treeBlockClone.name = "TreeBlock";
                         treeBlockClone.transform.SetParent(spawnParent);
-                        yield return new WaitForSeconds(0.05F);
+                        yield return new WaitForSeconds(levelPopDelay);
                         break;
                     case ('R'):
                         rockBlockClone = Instantiate(RockBlock, objectPosition, Quaternion.identity) as GameObject;
                         rockBlockClone.name = "Rockblock";
                         rockBlockClone.transform.SetParent(spawnParent);
-                        yield return new WaitForSeconds(0.05F);
+                        yield return new WaitForSeconds(levelPopDelay);
                         break;
                     default:
                         //Debug.Log(levelTextChar[j]);

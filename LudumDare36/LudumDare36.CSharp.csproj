@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BoomerangThrow.cs" />
     <Compile Include="Assets\Scripts\Camera2DFollow.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CreatureHealth.cs" />
     <Compile Include="Assets\Scripts\DeadCreaturePickup.cs" />
     <Compile Include="Assets\Scripts\GameControlLoop.cs" />

@@ -8,7 +8,7 @@ public class HuntingBoomerang : MonoBehaviour {
     Vector3 oppositeVelocity;
     public float brakePower;
     private float delayTimer;
-    private bool pickupable;
+    public bool pickupable;
     PlayerWeapons playerWeapons;
 	
     void Start()
@@ -32,6 +32,7 @@ public class HuntingBoomerang : MonoBehaviour {
             if (!isStationary && delayTimer <= 0)
             {
                 rb.Sleep();
+                rb.freezeRotation = true;
                 isStationary = true;
                 pickupable = true;
             }
@@ -53,8 +54,8 @@ public class HuntingBoomerang : MonoBehaviour {
             {
                 playerWeapons = coll.GetComponent<PlayerWeapons>();
                 playerWeapons.NumberOfHuntingBoomerangs++;
+                Destroy(gameObject);
             }
-            Destroy(this);
         }
     }
 }
