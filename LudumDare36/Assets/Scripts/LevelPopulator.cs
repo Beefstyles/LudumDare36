@@ -20,8 +20,6 @@ public class LevelPopulator : MonoBehaviour {
     public IEnumerator PopulateLevel(string[] levelText, int gridXSize, int gridYSize)
     {
         levelGrid.transform.localScale = new Vector3(gridXSize, gridYSize, 1F);
-        //levelGridRend = levelGrid.GetComponent<Renderer>();
-        //levelGridRend.material.mainTextureScale = new Vector2(gridXSize, gridYSize);
         for (int i = 0; i < levelText.Length; i++)
         {
             char[] levelTextChar = levelText[i].ToCharArray();
