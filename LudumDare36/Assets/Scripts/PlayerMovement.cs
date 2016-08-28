@@ -51,18 +51,14 @@ public class PlayerMovement : MonoBehaviour {
             playerSprite.sprite = PlayerUp;
             transform.Translate(0, currentSpeed * Time.deltaTime, 0);
             playerShootDirection = Vector2.up;
-            Debug.DrawLine(transform.position, Vector3.up);
             ShootPoint = Up.position;
-            //PlayerAnimator.SetBool("Up", false);
         }
         else if (Input.GetKey("down"))
         {
             playerSprite.sprite = PlayerDown;
             transform.Translate(0, -currentSpeed * Time.deltaTime, 0);
-            playerShootDirection = -Vector2.up;
+            playerShootDirection = Vector2.down;
             ShootPoint = Down.position;
-            //transform.localRotation = Quaternion.Euler(0, -180, 0);
-            //playerShootDirection = Down.position;
         }
         else if (Input.GetKey("left"))
         {
