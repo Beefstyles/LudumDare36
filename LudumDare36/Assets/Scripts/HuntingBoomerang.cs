@@ -12,6 +12,7 @@ public class HuntingBoomerang : MonoBehaviour {
     PlayerWeapons playerWeapons;
     CreatureHealth creatureHealth;
     private int damage = 100;
+    public Vector2 ShootDirection;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class HuntingBoomerang : MonoBehaviour {
         pickupable = false;
         rb = GetComponent<Rigidbody2D>();
         rb.AddTorque(15F);
+        //rb.velocity = ShootDirection * 100;
     }
 
 	void Update ()

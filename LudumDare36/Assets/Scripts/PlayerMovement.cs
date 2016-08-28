@@ -13,19 +13,22 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 mousePos;
     private float projectileSpeed = 5.0F;
     Animator PlayerAnimator;
-    private Vector2 playerShootDirection;
+    public Vector3 playerShootDirection;
+    private SpriteRenderer playerSprite;
+    public Sprite PlayerUp, PlayerDown, PlayerLeft, PlayerRight;
+    public Transform Up, Down, Left, Right;
+    private Vector3 ShootPoint;
 
     void Start()
     {
         playerWeapons = GetComponent<PlayerWeapons>();
         PlayerAnimator = GetComponent<Animator>();
-        
+        playerSprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
     }
 
 	void FixedUpdate ()
@@ -45,27 +48,35 @@ public class PlayerMovement : MonoBehaviour {
         //GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * currentSpeed, 0.8F), Mathf.Lerp(0, Input.GetAxis("Vertical") * currentSpeed, 0.8F));
         if (Input.GetKey("up"))
         {
-            PlayerAnimator.SetTrigger("Up");
+            playerSprite.sprite = PlayerUp;
             transform.Translate(0, currentSpeed * Time.deltaTime, 0);
             playerShootDirection = Vector2.up;
+            Debug.DrawLine(transform.position, Vector3.up);
+            ShootPoint = Up.position;
+            //PlayerAnimator.SetBool("Up", false);
         }
         else if (Input.GetKey("down"))
         {
-            PlayerAnimator.SetTrigger("Down");
+            playerSprite.sprite = PlayerDown;
             transform.Translate(0, -currentSpeed * Time.deltaTime, 0);
-            playerShootDirection = Vector2.down;
+            playerShootDirection = -Vector2.up;
+            ShootPoint = Down.position;
+            //transform.localRotation = Quaternion.Euler(0, -180, 0);
+            //playerShootDirection = Down.position;
         }
         else if (Input.GetKey("left"))
         {
-            PlayerAnimator.SetTrigger("Left");
+            playerSprite.sprite = PlayerLeft;
             transform.Translate(-currentSpeed * Time.deltaTime, 0, 0);
             playerShootDirection = Vector2.left;
+            ShootPoint = Left.position;
         }
         else if (Input.GetKey("right"))
         {
-            PlayerAnimator.SetTrigger("Right");
+            playerSprite.sprite = PlayerRight;
             transform.Translate(currentSpeed * Time.deltaTime, 0, 0);
             playerShootDirection = Vector2.right;
+            ShootPoint = Right.position;
         }
 
     }
@@ -82,8 +93,14 @@ public class PlayerMovement : MonoBehaviour {
                 var q = Quaternion.FromToRotation(Vector3.up, pos - transform.position);
                 weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, q) as GameObject;
                 */
-                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, Quaternion.identity) as GameObject;
-                weaponUsed.GetComponent<Rigidbody2D>().AddForce(playerShootDirection * 500.0F);
+                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, ShootPoint, Quaternion.identity) as GameObject;
+                //playerShootDirection.Normalize();
+                //weaponUsed.GetComponent<Rigidbody2D>().AddForce(playerShootDirection * 1000.0F);
+                //weaponUsed.transform.position = Vector3.MoveTowards(weaponUsed.transform.position, playerShootDirection, 100 * Time.deltaTime);
+                //weaponUsed.GetComponent<Rigidbody2D>().velocity = playerShootDirection;
+                //weaponUsed.transform.Translate(playerShootDirection * 50 * Time.deltaTime);
+                //weaponUsed.GetComponent<HuntingBoomerang>().ShootDirection = playerShootDirection;
+                weaponUsed.GetComponent<Rigidbody2D>().AddRelativeForce(playerShootDirection * 500);
                 playerWeapons.NumberOfHuntingBoomerangs--;
             }
         }
