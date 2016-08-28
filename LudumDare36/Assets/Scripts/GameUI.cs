@@ -35,12 +35,8 @@ public class GameUI : MonoBehaviour {
             {
                 gameText.WeaponChoice.text = playerMovement.weaponUsed.name.ToString();
             }
-
             gameText.WeaponChoiceRem.text = playerWeapons.NumberOfHuntingBoomerangs.ToString();
             gameText.PlayerFoodStore.text = playerFoodStore.CurrentPlayerFoodStore.ToString();
         }
-
-       
-
     }
 }
