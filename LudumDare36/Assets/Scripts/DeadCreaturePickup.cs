@@ -12,6 +12,8 @@ public class DeadCreaturePickup : MonoBehaviour {
         {
             pf = coll.GetComponent<PlayerFoodStore>();
             pf.CurrentPlayerFoodStore += FoodProvided;
+            Debug.Log("Food added: " + FoodProvided);
+            Destroy(gameObject);
         }
     }
 }

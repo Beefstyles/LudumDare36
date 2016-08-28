@@ -7,27 +7,29 @@ public class GameUI : MonoBehaviour {
     [System.Serializable]
     public class GameText
     {
-        public Text WeaponChoice, WeaponChoiceRem;
+        public Text WeaponChoice, WeaponChoiceRem, PlayerFoodStore, TimeRemaining;
     }
 
     PlayerWeapons playerWeapons;
     PlayerMovement playerMovement;
+    PlayerFoodStore playerFoodStore;
     public GameText gameText;
 
-    void Start ()
+    void Start()
     {
-        
+
     }
-	
-	void Update ()
+
+    void Update()
     {
-        if(playerWeapons == null || playerMovement == null)
+        if (playerWeapons == null || playerMovement == null || playerFoodStore == null)
         {
             playerWeapons = FindObjectOfType<PlayerWeapons>();
             playerMovement = FindObjectOfType<PlayerMovement>();
+            playerFoodStore = FindObjectOfType<PlayerFoodStore>();
         }
 
-        if (playerWeapons != null && playerMovement != null)
+        if (playerWeapons != null && playerMovement != null && playerFoodStore != null)
         {
             if (playerMovement.weaponUsed != null)
             {
@@ -35,7 +37,9 @@ public class GameUI : MonoBehaviour {
             }
 
             gameText.WeaponChoiceRem.text = playerWeapons.NumberOfHuntingBoomerangs.ToString();
+            gameText.PlayerFoodStore.text = playerFoodStore.CurrentPlayerFoodStore.ToString();
         }
+
        
 
     }
