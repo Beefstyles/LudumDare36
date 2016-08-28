@@ -12,10 +12,13 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject weaponUsed;
     Vector3 mousePos;
     private float projectileSpeed = 5.0F;
+    Animator PlayerAnimator;
 
     void Start()
     {
         playerWeapons = GetComponent<PlayerWeapons>();
+        PlayerAnimator = GetComponent<Animator>();
+        
     }
 
     void Update()
@@ -38,7 +41,28 @@ public class PlayerMovement : MonoBehaviour {
         {
             currentSpeed = PlayerSprintSpeed;
         }
-        GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * currentSpeed, 0.8F), Mathf.Lerp(0, Input.GetAxis("Vertical") * currentSpeed, 0.8F));
+        //GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * currentSpeed, 0.8F), Mathf.Lerp(0, Input.GetAxis("Vertical") * currentSpeed, 0.8F));
+        if (Input.GetKey("up"))
+        {
+            PlayerAnimator.SetTrigger("Up");
+            transform.Translate(0, currentSpeed * Time.deltaTime, 0);
+        }
+        if (Input.GetKey("down"))
+        {
+            PlayerAnimator.SetTrigger("Down");
+            transform.Translate(0, -currentSpeed * Time.deltaTime, 0);
+        }
+        if (Input.GetKey("left"))
+        {
+            PlayerAnimator.SetTrigger("Left");
+            transform.Translate(-currentSpeed * Time.deltaTime, 0, 0);
+        }
+        if (Input.GetKey("right"))
+        {
+            PlayerAnimator.SetTrigger("Right");
+            transform.Translate(currentSpeed * Time.deltaTime, 0, 0);
+        }
+
     }
 
     void PlayerWeaponHandling()
