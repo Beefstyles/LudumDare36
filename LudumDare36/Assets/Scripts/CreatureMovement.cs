@@ -15,7 +15,6 @@ public class CreatureMovement : MonoBehaviour {
     {
         hasTarget = false;
         scannedForTargets = false;
-
         gameControlLoop = FindObjectOfType<GameControlLoop>();
     }
 	

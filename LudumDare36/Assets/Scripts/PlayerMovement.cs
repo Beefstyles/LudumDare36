@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 mousePos;
     private float projectileSpeed = 5.0F;
     Animator PlayerAnimator;
+    private Vector2 playerShootDirection;
 
     void Start()
     {
@@ -46,21 +47,25 @@ public class PlayerMovement : MonoBehaviour {
         {
             PlayerAnimator.SetTrigger("Up");
             transform.Translate(0, currentSpeed * Time.deltaTime, 0);
+            playerShootDirection = Vector2.up;
         }
-        if (Input.GetKey("down"))
+        else if (Input.GetKey("down"))
         {
             PlayerAnimator.SetTrigger("Down");
             transform.Translate(0, -currentSpeed * Time.deltaTime, 0);
+            playerShootDirection = Vector2.down;
         }
-        if (Input.GetKey("left"))
+        else if (Input.GetKey("left"))
         {
             PlayerAnimator.SetTrigger("Left");
             transform.Translate(-currentSpeed * Time.deltaTime, 0, 0);
+            playerShootDirection = Vector2.left;
         }
-        if (Input.GetKey("right"))
+        else if (Input.GetKey("right"))
         {
             PlayerAnimator.SetTrigger("Right");
             transform.Translate(currentSpeed * Time.deltaTime, 0, 0);
+            playerShootDirection = Vector2.right;
         }
 
     }
@@ -71,12 +76,14 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (playerWeapons.NumberOfHuntingBoomerangs >= 1)
             {
-                var pos = Input.mousePosition;
+                /*var pos = Input.mousePosition;
                 pos.z = transform.position.z - Camera.main.transform.position.z;
                 pos = Camera.main.ScreenToWorldPoint(pos);
                 var q = Quaternion.FromToRotation(Vector3.up, pos - transform.position);
                 weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, q) as GameObject;
-                weaponUsed.GetComponent<Rigidbody2D>().AddForce(weaponUsed.transform.up * 500.0F);
+                */
+                weaponUsed = Instantiate(playerWeapons.HuntingBoomerang, transform.position, Quaternion.identity) as GameObject;
+                weaponUsed.GetComponent<Rigidbody2D>().AddForce(playerShootDirection * 500.0F);
                 playerWeapons.NumberOfHuntingBoomerangs--;
             }
         }
