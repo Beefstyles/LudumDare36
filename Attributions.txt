@@ -1,2 +1,4 @@
-Took grass texture from:
+Grass texture taken from:
 http://opengameart.org/content/grass-texture
+Music taken from:
+http://www.davidvitas.com/portfolio/2016/5/12/rpg-music-pack

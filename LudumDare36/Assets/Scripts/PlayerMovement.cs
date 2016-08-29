@@ -18,12 +18,14 @@ public class PlayerMovement : MonoBehaviour {
     public Sprite PlayerUp, PlayerDown, PlayerLeft, PlayerRight;
     public Transform Up, Down, Left, Right;
     private Vector3 ShootPoint;
+    GameControlLoop gameControlLoop;
 
     void Start()
     {
         playerWeapons = GetComponent<PlayerWeapons>();
         PlayerAnimator = GetComponent<Animator>();
         playerSprite = GetComponent<SpriteRenderer>();
+        gameControlLoop = FindObjectOfType<GameControlLoop>();
     }
 
     void Update()
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (playerWeapons.NumberOfHuntingBoomerangs >= 1)
+            if (playerWeapons.NumberOfHuntingBoomerangs >= 1 && gameControlLoop.GameStarted)
             {
                 /*var pos = Input.mousePosition;
                 pos.z = transform.position.z - Camera.main.transform.position.z;

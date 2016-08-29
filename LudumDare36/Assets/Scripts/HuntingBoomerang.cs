@@ -48,16 +48,10 @@ public class HuntingBoomerang : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    public void DestroyBoomerang()
     {
-        if (coll.gameObject.tag == "Player")
-        {
-            if (pickupable)
-            {
-                playerWeapons = coll.gameObject.GetComponent<PlayerWeapons>();
-                playerWeapons.NumberOfHuntingBoomerangs++;
-                Destroy(gameObject);
-            }
-        }
+        Destroy(gameObject);
     }
+
+    
 }

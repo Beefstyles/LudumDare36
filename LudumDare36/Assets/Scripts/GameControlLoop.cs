@@ -19,6 +19,7 @@ public class GameControlLoop : MonoBehaviour {
     void Start ()
     {
         Time.timeScale = 1.0F;
+        Cursor.visible = false;
         gameUI = FindObjectOfType<GameUI>();
         gameUI.GameOnScreen.SetActive(true);
         gameUI.GameOverScreen.SetActive(false);
@@ -36,6 +37,8 @@ public class GameControlLoop : MonoBehaviour {
         {
             Instantiate(Player, PlayerSpawnPoint.position, Quaternion.identity);
             gameUI.gameText.LoadingLevelText.text = "";
+            gameUI.gameText.HarvestReqLabel.text = "";
+            gameUI.gameText.HarvestReqText.text = "";
             playerSpawned = true;
         }
 
@@ -57,6 +60,7 @@ public class GameControlLoop : MonoBehaviour {
 
     void EndLevel()
     {
+        Cursor.visible = true;
         playerFoodStore = FindObjectOfType<PlayerFoodStore>();
         playerWeapons = FindObjectOfType<PlayerWeapons>();
         Time.timeScale = 0.0F;
@@ -65,6 +69,7 @@ public class GameControlLoop : MonoBehaviour {
         /*
         public Text WeaponChoice, WeaponChoiceRem, PlayerFoodStore, TimeRemaining,
             WeekText, FoodHarvText, FoodReqText, KyleesRemText, StatusText;
+            HarvestReqLabel, HarvestReqText;
         */
         gameUI.gameText.WeekText.text = CarryOverInfo.CurrentLevel.ToString();
         gameUI.gameText.FoodHarvText.text = playerFoodStore.CurrentPlayerFoodStore.ToString();
@@ -88,6 +93,7 @@ public class GameControlLoop : MonoBehaviour {
         {
             gameUI.gameText.StatusText.text = "You collected enough food to survive the week. You have collected another person so your food requirement has gone up by 20";
             CarryOverInfo.FoodRequired += 20;
+            CarryOverInfo.TimeAvailable += 5;
         }
         CarryOverInfo.NumberOfKylees = playerWeapons.NumberOfHuntingBoomerangs;
         CarryOverInfo.NumberOfKylees++;

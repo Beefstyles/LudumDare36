@@ -11,11 +11,14 @@ public class LevelPopulator : MonoBehaviour {
     public GameObject levelGrid;
     private Renderer levelGridRend;
     GameControlLoop gameControlLoop;
-    private float levelPopDelay = 0.0001F;
+    private float levelPopDelay = 0.00001F;
+    GameUI gameUI;
 
     void Start()
     {
         gameControlLoop = FindObjectOfType<GameControlLoop>();
+        gameUI = FindObjectOfType<GameUI>();
+        gameUI.gameText.HarvestReqText.text = CarryOverInfo.FoodRequired.ToString();
     }
     public IEnumerator PopulateLevel(string[] levelText, int gridXSize, int gridYSize)
     {
