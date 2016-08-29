@@ -8,7 +8,8 @@ public class GameUI : MonoBehaviour {
     public class GameText
     {
         public Text WeaponChoice, WeaponChoiceRem, PlayerFoodStore, TimeRemaining,
-            WeekText, FoodHarvText, FoodReqText, KyleesRemText, StatusText;
+            WeekText, FoodHarvText, FoodReqText, KyleesRemText, StatusText,
+            LoadingLevelText;
     }
 
     public Button NextWeek, RestartGame;

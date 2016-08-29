@@ -35,6 +35,7 @@ public class GameControlLoop : MonoBehaviour {
 	    if(GameStarted && !playerSpawned)
         {
             Instantiate(Player, PlayerSpawnPoint.position, Quaternion.identity);
+            gameUI.gameText.LoadingLevelText.text = "";
             playerSpawned = true;
         }
 

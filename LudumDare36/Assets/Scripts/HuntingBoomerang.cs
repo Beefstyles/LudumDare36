@@ -46,8 +46,11 @@ public class HuntingBoomerang : MonoBehaviour {
             creatureHealth = coll.gameObject.GetComponent<CreatureHealth>();
             creatureHealth.CreatureHlth -= damage;
         }
+    }
 
-        if(coll.gameObject.tag == "Player")
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Player")
         {
             if (pickupable)
             {

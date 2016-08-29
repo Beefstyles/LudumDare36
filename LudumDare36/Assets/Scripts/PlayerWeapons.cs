@@ -9,7 +9,7 @@ public class PlayerWeapons : MonoBehaviour {
 
 	void Start ()
     {
-        NumberOfHuntingBoomerangs = 5;
+        NumberOfHuntingBoomerangs = CarryOverInfo.NumberOfKylees;
     }
 	
 
