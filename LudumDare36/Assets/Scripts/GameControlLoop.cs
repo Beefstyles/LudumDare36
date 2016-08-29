@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameControlLoop : MonoBehaviour {
     public GameObject Player;
@@ -67,19 +68,39 @@ public class GameControlLoop : MonoBehaviour {
         gameUI.gameText.KyleesRemText.text = playerWeapons.NumberOfHuntingBoomerangs.ToString();
         if (playerFoodStore.CurrentPlayerFoodStore >= CarryOverInfo.FoodRequired)
         {
-            gameUI.gameText.StatusText.text = "You collected enough food to survive the week.";
-            if (CarryOverInfo.CurrentLevel % 3 == 0)
-            {
-                gameUI.gameText.StatusText.text = "You collected enough food to survive the week. You have collected another person so your food requirement has gone up by 20";
-                CarryOverInfo.FoodRequired += 20;
-            }
-            CarryOverInfo.NumberOfKylees = playerWeapons.NumberOfHuntingBoomerangs;
-            CarryOverInfo.NumberOfKylees++;
+            EndGameSuccesful();
+        }
+
+        else
+        {
+            EndGameFailure();
         }
     }
 
-    void NextLevel()
+    void EndGameSuccesful()
     {
+        gameUI.gameText.StatusText.text = "You collected enough food to survive the week.";
+        if (CarryOverInfo.CurrentLevel % 3 == 0)
+        {
+            gameUI.gameText.StatusText.text = "You collected enough food to survive the week. You have collected another person so your food requirement has gone up by 20";
+            CarryOverInfo.FoodRequired += 20;
+        }
+        CarryOverInfo.NumberOfKylees = playerWeapons.NumberOfHuntingBoomerangs;
+        CarryOverInfo.NumberOfKylees++;
+        CarryOverInfo.CurrentLevel++;
+        gameUI.RestartGame.enabled = true;
+        gameUI.NextWeek.enabled = true;
+    }
 
+    void EndGameFailure()
+    {
+        gameUI.gameText.StatusText.text = "You were not succesful enough to survive. You survived " + CarryOverInfo.CurrentLevel.ToString() + " weeks";
+        gameUI.RestartGame.enabled = true;
+        gameUI.NextWeek.enabled = false;
+    }
+
+    public void NextLevelButton()
+    {
+        SceneManager.LoadScene("MainLevel");
     }
 }
