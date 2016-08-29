@@ -7,13 +7,17 @@ public class GameUI : MonoBehaviour {
     [System.Serializable]
     public class GameText
     {
-        public Text WeaponChoice, WeaponChoiceRem, PlayerFoodStore, TimeRemaining;
+        public Text WeaponChoice, WeaponChoiceRem, PlayerFoodStore, TimeRemaining,
+            WeekText, FoodHarvText, FoodReqText, KyleesRemText, StatusText;
     }
+
+    public Button NextWeek, RestartGame;
 
     PlayerWeapons playerWeapons;
     PlayerMovement playerMovement;
     PlayerFoodStore playerFoodStore;
     public GameText gameText;
+    public GameObject GameOnScreen, GameOverScreen;
 
     void Start()
     {
