@@ -15,7 +15,7 @@ public class ButtonHandler : MonoBehaviour {
         CarryOverInfo.NumberOfKylees = 5;
         CarryOverInfo.CurrentLevel = 1;
         CarryOverInfo.FoodRequired = 30;
-        CarryOverInfo.TimeAvailable = 50;
+        CarryOverInfo.TimeAvailable = 20;
         SceneManager.LoadScene("MainLevel");
     }
 }

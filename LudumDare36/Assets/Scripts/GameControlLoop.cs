@@ -7,7 +7,7 @@ public class GameControlLoop : MonoBehaviour {
     private bool playerSpawned;
     public bool GameStarted;
     public Transform PlayerSpawnPoint;
-    private int timeAvailable;
+    public float timeAvailable;
     private int numberOfKylees;
     private int currentLevel;
     private int foodRequired;
@@ -38,9 +38,9 @@ public class GameControlLoop : MonoBehaviour {
             playerSpawned = true;
         }
 
-        if(timeAvailable >= 0)
+        if(timeAvailable >= 0 && GameStarted)
         {
-            timeAvailable -= (int)Time.deltaTime;
+            timeAvailable -= Time.deltaTime;
         }
         if(timeAvailable <= 0)
         {
@@ -50,7 +50,9 @@ public class GameControlLoop : MonoBehaviour {
                 endOfRoundStarted = true;
             }
         }
-	}
+
+        gameUI.gameText.TimeRemaining.text = Mathf.Round(timeAvailable).ToString();
+    }
 
     void EndLevel()
     {
@@ -89,15 +91,15 @@ public class GameControlLoop : MonoBehaviour {
         CarryOverInfo.NumberOfKylees = playerWeapons.NumberOfHuntingBoomerangs;
         CarryOverInfo.NumberOfKylees++;
         CarryOverInfo.CurrentLevel++;
-        gameUI.RestartGame.enabled = true;
-        gameUI.NextWeek.enabled = true;
+        gameUI.RestartGame.interactable = true;
+        gameUI.NextWeek.interactable = true;
     }
 
     void EndGameFailure()
     {
         gameUI.gameText.StatusText.text = "You were not succesful enough to survive. You survived " + CarryOverInfo.CurrentLevel.ToString() + " weeks";
-        gameUI.RestartGame.enabled = true;
-        gameUI.NextWeek.enabled = false;
+        gameUI.RestartGame.interactable = true;
+        gameUI.NextWeek.interactable = false;
     }
 
     public void NextLevelButton()

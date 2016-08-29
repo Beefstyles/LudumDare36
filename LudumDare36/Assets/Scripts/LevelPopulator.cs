@@ -11,7 +11,7 @@ public class LevelPopulator : MonoBehaviour {
     public GameObject levelGrid;
     private Renderer levelGridRend;
     GameControlLoop gameControlLoop;
-    private float levelPopDelay = 0.001F;
+    private float levelPopDelay = 0.0001F;
 
     void Start()
     {
