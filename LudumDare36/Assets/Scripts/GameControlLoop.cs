@@ -19,6 +19,7 @@ public class GameControlLoop : MonoBehaviour {
     void Start ()
     {
         Time.timeScale = 1.0F;
+        gameUI = FindObjectOfType<GameUI>();
         gameUI.GameOnScreen.SetActive(true);
         gameUI.GameOverScreen.SetActive(false);
         gameUI = FindObjectOfType<GameUI>();
